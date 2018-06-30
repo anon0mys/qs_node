@@ -4,7 +4,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/secrets',
+    connection: 'postgres://localhost/qs_node',
     migrations: {
       directory: './db/migrations'
     },
@@ -16,7 +16,7 @@ module.exports = {
 
   test: {
     client: 'pg',
-    connection:'postgres://localhost/secrets_test',
+    connection:'postgres://localhost/qs_node_test',
     migrations: {
       directory: './db/migrations'
     },
