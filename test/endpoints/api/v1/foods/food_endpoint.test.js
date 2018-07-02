@@ -15,4 +15,13 @@ describe('GET /api/v1/foods/:id', () => {
         })
       })
   })
+
+  it('returns 404 if food not found', () => {
+    chai.request(app)
+      .get('/api/v1/foods/200')
+      .end((err, res) => {
+        res.should.have.status(404)
+        done()
+      })
+  })
 })
