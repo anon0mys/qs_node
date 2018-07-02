@@ -4,4 +4,7 @@ node_js:
   - "8.11"
 before_script:
   - npm install -g knex
+  - npm install knex
+  - psql -c 'create database qs_node' -U postgres
+  - psql -c 'create database qs_node_test' -U postgres
   - knex migrate:latest
