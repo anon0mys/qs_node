@@ -6,6 +6,7 @@ const chaiHttp = require('chai-http')
 const app = require('../app')
 const database = require('../database')
 const pry = require('pryjs')
+const mealsSeed = require('../db/seeds/test/meals')
 
 chai.use(chaiHttp)
 
@@ -16,11 +17,12 @@ global.database = database
 global.pry = pry
 
 beforeEach((done) => {
-  database.raw('TRUNCATE foods RESTART IDENTITY')
-    .then(() => {
-      done();
-    })
-    .catch((err) => {
-      done(err);
-    });
+  promises = [
+    database.raw('TRUNCATE foods RESTART IDENTITY'),
+    database.seed.run()
+  ]
+  Promise.all(promises).then(() => {
+    done()
+  })
+
 });
