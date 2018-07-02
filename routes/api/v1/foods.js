@@ -1,14 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const environment = process.env.NODE_ENV || 'development'
-const configuration = require('../../../knexfile')[environment]
-const database = require('knex')(configuration)
+const Food = require('../../../models/food.js')
 
 /* POST to /foods to create food */
 router.post('/', (req, res, next) => {
-  database('foods')
-    .insert(req.body.food)
-    .returning(['id', 'name', 'calories'])
+  Food.create(req.body.food)
     .then((food) => {
       res.status(200).json(food)
     })
@@ -16,7 +12,7 @@ router.post('/', (req, res, next) => {
 
 /* GET to /foods to return a list of foods */
 router.get('/', (req, res, next) => {
-  database('foods')
+  Food.all()
     .then((foods) => {
       res.status(200).json(foods)
     })
