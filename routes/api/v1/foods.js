@@ -7,7 +7,7 @@ const database = require('knex')(configuration)
 /* POST to /foods to create food */
 router.post('/', (req, res, next) => {
   database('foods')
-    .insert(req.body)
+    .insert(req.body.food)
     .returning(['id', 'name', 'calories'])
     .then((food) => {
       res.status(200).json(food)
