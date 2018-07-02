@@ -11,4 +11,14 @@ describe('POST /api/v1/foods', () => {
         done()
       })
   })
+
+  it('returns 400 status if food not created', (done) => {
+    chai.request(app)
+      .post('/api/v1/foods')
+      .send({})
+      .end((err, res) => {
+        res.should.have.status(400)
+        done()
+      })
+  })
 })
