@@ -14,4 +14,11 @@ const index = (req, res, next) => {
     })
 }
 
-module.exports = { create, index }
+const show = (req, res, next) => {
+  Food.find(req.params.id)
+    .then((food) => {
+      res.json(food)
+    })
+}
+
+module.exports = { create, index, show }
