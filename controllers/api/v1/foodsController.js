@@ -30,4 +30,19 @@ const show = (req, res, next) => {
     })
 }
 
-module.exports = { create, index, show }
+const update = (req, res, next) => {
+  Food.update(req.params.id, req.body)
+    .then((food) => {
+      if(food.length > 0) {
+        res.json(food[0])
+      }
+      else {
+        res.status(404).send()
+      }
+    })
+    .catch((err) => {
+      res.status(400).send()
+    })
+}
+
+module.exports = { create, index, show, update }
