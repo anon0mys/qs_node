@@ -35,6 +35,9 @@ const update = (req, res, next) => {
     .then((food) => {
       res.json(food[0])
     })
+    .catch((err) => {
+      res.status(400).send()
+    })
 }
 
 module.exports = { create, index, show, update }
