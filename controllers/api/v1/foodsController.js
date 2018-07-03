@@ -31,7 +31,7 @@ const show = (req, res, next) => {
 }
 
 const update = (req, res, next) => {
-  Food.update(req.params.id, req.body)
+  Food.update(req.params.id, req.body.food)
     .then((food) => {
       if(food.length > 0) {
         res.json(food[0])

@@ -7,7 +7,7 @@ describe('PUTS /api/v1/foods/:id', () => {
       .then((food) => {
         chai.request(app)
           .put(`/api/v1/foods/${food[0].id}`)
-          .send({ 'Name': 'Changed'})
+          .send({ food: { 'name': 'Changed'}})
           .end((err, res) => {
             res.should.have.status(200)
             res.body.name.should.eql('Changed')
@@ -23,7 +23,7 @@ describe('PUTS /api/v1/foods/:id', () => {
       .then((food) => {
         chai.request(app)
           .put(`/api/v1/foods/${food[0].id}`)
-          .send({ 'Calories': '200'})
+          .send({ food: { 'calories': '200'}})
           .end((err, res) => {
             res.should.have.status(200)
             res.body.calories.should.eql('200')
@@ -39,9 +39,24 @@ describe('PUTS /api/v1/foods/:id', () => {
       .then((food) => {
         chai.request(app)
           .put(`/api/v1/foods/${food[0].id}`)
-          .send({ 'notRealAttribute': 'Changed'})
+          .send({ food: { 'notRealAttribute': 'Changed'}})
           .end((err, res) => {
             res.should.have.status(400)
+            done()
+          })
+      })
+  })
+
+  it('returns 404 if food not found', (done) => {
+    const food = database('foods')
+      .insert({ 'name': 'Pizza', 'calories': '100'})
+      .returning(['id', 'name', 'calories'])
+      .then((food) => {
+        chai.request(app)
+          .put('/api/v1/foods/200')
+          .send({ food: { 'name': 'Changed'}})
+          .end((err, res) => {
+            res.should.have.status(404)
             done()
           })
       })
