@@ -3,6 +3,13 @@ node_js:
   - "8.11"
 addons:
   postgresql: "10"
+    apt:
+    packages:
+    - postgresql-10
+    - postgresql-client-10
+env:
+  global:
+  - PGPORT=5433
 before_script:
   - npm install -g knex
   - npm install knex
