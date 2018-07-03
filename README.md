@@ -24,24 +24,26 @@ The prerequisites for this application are:
 git clone https://github.com/anon0mys/quantified_self.git
 cd quantified_self
 ```
-- Run bundle to install the gem dependencies:
+- Run npm to install the gem dependencies:
 ```
-
+npm install
 ```
-- Migrate and seed the database:
+- Install Knex, setup the database, and run migrations and seeds:
 ```
-
+npm install -g knex
+npm install knex
+psql -c 'create database qs_node' -U postgres
+psql -c 'create database qs_node_test' -U postgres
+knex migrate:latest
+knex seed:run
+NODE_ENV=test knex migrate:latest
+NODE_ENV=test knex seed:run
 ```
 
 ### The Test Suite
 - The test suite is written in RSpec. To run the test suite, from the root project folder run:
 ```
-
-```
-
-- In order to run a specific test file, add the path to the test file:
-```
-
+npm test
 ```
 
 ### Endpoints
