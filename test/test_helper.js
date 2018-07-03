@@ -18,7 +18,7 @@ global.pry = pry
 
 beforeEach((done) => {
   promises = [
-    database.raw('TRUNCATE foods RESTART IDENTITY'),
+    database.raw('TRUNCATE foods RESTART IDENTITY CASCADE'),
     database.seed.run()
   ]
   Promise.all(promises).then(() => {
