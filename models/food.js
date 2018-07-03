@@ -16,7 +16,7 @@ class Food {
   }
 
   static update(id, attrs) {
-    let params = {name: attrs.Name, calories: attrs.Calories}
+    let params = {name: attrs.name, calories: attrs.calories}
     return database('foods')
       .where({id: id})
       .update(params)
