@@ -6,6 +6,12 @@ class MealFood {
       .insert({meal_id: '1', food_id: '1'})
       .returning(['meal_id', 'food_id'])
   }
+
+  static destroy(params) {
+    return database('meal_foods')
+      .where({meal_id: params.meal_id, food_id: params.id})
+      .del()
+  }
 }
 
 module.exports = MealFood
