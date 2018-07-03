@@ -1,16 +1,32 @@
 
 describe('PUTS /api/v1/foods/:id', () => {
-  it('updates a food item', (done) => {
+  it('updates a food item name', (done) => {
     const food = database('foods')
       .insert({ 'name': 'Pizza', 'calories': '100'})
       .returning(['id', 'name', 'calories'])
       .then((food) => {
         chai.request(app)
           .put(`/api/v1/foods/${food[0].id}`)
-          .send({ 'name': 'Changed'})
+          .send({ 'Name': 'Changed'})
           .end((err, res) => {
             res.should.have.status(200)
             res.body.name.should.eql('Changed')
+            done()
+          })
+      })
+  })
+
+  it('updates a food item calories', (done) => {
+    const food = database('foods')
+      .insert({ 'name': 'Pizza', 'calories': '100'})
+      .returning(['id', 'name', 'calories'])
+      .then((food) => {
+        chai.request(app)
+          .put(`/api/v1/foods/${food[0].id}`)
+          .send({ 'Calories': '200'})
+          .end((err, res) => {
+            res.should.have.status(200)
+            res.body.calories.should.eql('200')
             done()
           })
       })
@@ -26,21 +42,6 @@ describe('PUTS /api/v1/foods/:id', () => {
           .send({ 'notRealAttribute': 'Changed'})
           .end((err, res) => {
             res.should.have.status(400)
-            done()
-          })
-      })
-  })
-
-  it('returns 404 if food not found', (done) => {
-    const food = database('foods')
-      .insert({ 'name': 'Pizza', 'calories': '100'})
-      .returning(['id', 'name', 'calories'])
-      .then((food) => {
-        chai.request(app)
-          .put('/api/v1/foods/200')
-          .send({ 'name': 'Changed'})
-          .end((err, res) => {
-            res.should.have.status(404)
             done()
           })
       })
