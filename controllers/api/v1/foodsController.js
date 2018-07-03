@@ -30,4 +30,11 @@ const show = (req, res, next) => {
     })
 }
 
-module.exports = { create, index, show }
+const update = (req, res, next) => {
+  Food.update(req.params.id, req.body)
+    .then((food) => {
+      res.json(food[0])
+    })
+}
+
+module.exports = { create, index, show, update }
