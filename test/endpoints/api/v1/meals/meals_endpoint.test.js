@@ -1,12 +1,12 @@
 describe('GET /api/v1/meals', () => {
   it('returns a list of meals', (done) => {
-    database('foods')
-      .insert({'name': 'Pizza', 'calories': '100'})
-      .then(() => {
-        database('meal_foods')
-          .insert({meal_id: '1', food_id: '1'})
-      })
-      .then(() => {
+    let promises = []
+
+    promises.push(database('foods').insert({'name': 'Pizza', 'calories': '100'}))
+
+    promises.push(database('meal_foods').insert({meal_id: '1', food_id: '1'}))
+
+    Promise.all(promises).then(() => {
         let expected = [{'id': 1,
                          'name': 'breakfast',
                          'foods': [
@@ -15,13 +15,13 @@ describe('GET /api/v1/meals', () => {
                             'calories': '100'}] },
                         {'id': 2,
                          'name': 'snack',
-                         'foods': []},
+                         'foods': [null]},
                         {'id': 3,
                          'name': 'lunch',
-                         'foods': []},
+                         'foods': [null]},
                         {'id': 4,
                          'name': 'dinner',
-                         'foods': []}]
+                         'foods': [null]}]
 
         chai.request(app)
         .get('/api/v1/meals')
