@@ -6,5 +6,6 @@ router.post('/', foodsController.create)
 router.get('/', foodsController.index)
 router.get('/:id', foodsController.show)
 router.put('/:id', foodsController.update)
+router.delete('/:id', foodsController.destroy)
 
 module.exports = router

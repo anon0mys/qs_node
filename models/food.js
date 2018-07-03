@@ -22,6 +22,12 @@ class Food {
       .update(params)
       .returning(['id', 'name', 'calories'])
   }
+
+  static destroy(id) {
+    return database('foods')
+      .where({id: id})
+      .del()
+  }
 }
 
 module.exports = Food

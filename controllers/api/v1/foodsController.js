@@ -45,4 +45,11 @@ const update = (req, res, next) => {
     })
 }
 
-module.exports = { create, index, show, update }
+const destroy = (req, res, next) => {
+  Food.destroy(req.params.id)
+    .then(() => {
+      res.status(204).send()
+    })
+}
+
+module.exports = { create, index, show, update, destroy }

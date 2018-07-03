@@ -1,5 +1,5 @@
 
-describe('PUTS /api/v1/foods', () => {
+describe('PUTS /api/v1/foods/:id', () => {
   it('updates a food item', (done) => {
     const food = database('foods')
       .insert({ 'name': 'Pizza', 'calories': '100'})
