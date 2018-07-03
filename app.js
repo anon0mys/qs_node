@@ -12,6 +12,10 @@ var mealsRouter = require('./routes/api/v1/meals');
 
 var app = express();
 
+var corsOptions = {
+
+}
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -22,6 +26,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
+
+app.options('*', cors())
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
