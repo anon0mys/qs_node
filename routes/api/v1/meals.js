@@ -5,5 +5,6 @@ const mealFoodsController = require('../../../controllers/api/v1/mealFoodsContro
 
 router.get('/', mealsController.index)
 router.post('/:meal_id/foods/:id', mealFoodsController.create)
+router.get('/:meal_id/foods', mealsController.show)
 
 module.exports = router

@@ -6,7 +6,7 @@ class Meal {
   }
 
   static find(id) {
-    return database('meals').where({ id: id }).first()
+    return database('meals').where({id: id}).first()
   }
 }
 
