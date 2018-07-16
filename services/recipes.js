@@ -3,9 +3,9 @@ const database = require('../database')
 const baseURL = 'http://api.yummly.com/v1/api/recipes'
 
 class RecipesService {
-  static find(id) {
+  static find(id, params) {
     return this.findFood(id).then((food) => {
-      return this.fetchRecipes(food)
+      return this.fetchRecipes(food, params.max, params.start)
     })
   }
 
@@ -15,8 +15,8 @@ class RecipesService {
       .first()
   }
 
-  static fetchRecipes(food) {
-    return fetch(`${baseURL}?q=${food.name}`, {
+  static fetchRecipes(food, max = 10, start = 1) {
+    return fetch(`${baseURL}?q=${food.name}&maxResult=${max}&start=${start}`, {
       headers: {'Content-Type': 'application/json',
                 'X-Yummly-App-ID': process.env.YUMMLYID,
                 'X-Yummly-App-Key': process.env.YUMMLYKEY}
