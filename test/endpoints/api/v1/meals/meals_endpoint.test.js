@@ -1,5 +1,5 @@
 describe('GET /api/v1/meals', () => {
-  it('returns a list of meals', (done) => {
+  xit('returns a list of meals', (done) => {
     let promises = []
 
     promises.push(database('foods').insert({'name': 'Pizza', 'calories': '100'}))
