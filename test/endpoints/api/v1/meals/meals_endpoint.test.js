@@ -15,13 +15,13 @@ describe('GET /api/v1/meals', () => {
                             'calories': '100'}] },
                         {'id': 2,
                          'name': 'snack',
-                         'foods': null},
+                         'foods': []},
                         {'id': 3,
                          'name': 'lunch',
-                         'foods': null},
+                         'foods': []},
                         {'id': 4,
                          'name': 'dinner',
-                         'foods': null}]
+                         'foods': []}]
 
         chai.request(app)
         .get('/api/v1/meals')
