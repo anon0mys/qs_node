@@ -1,8 +1,11 @@
-const Recipes = require('../../../services/recipes')
+const RecipesService = require('../../../services/recipes')
 
 const index = (req, res, next) => {
-  Recipes.find()
+  RecipesService.find(req.params.id)
     .then((recipes) => {
-      res.json(recipes)
+      var output = { 'recipes': recipes }
+      res.json(output)
     })
 }
+
+module.exports = { index }
